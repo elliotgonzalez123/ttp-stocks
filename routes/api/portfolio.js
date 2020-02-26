@@ -24,13 +24,23 @@ router.get('/', auth, async (req, res) => {
   let promises = Object.keys(obj).map(async item => {
     try {
       const quoteData = await iex.quote(item);
-      const { latestPrice } = quoteData;
+      const { latestPrice, previousClose } = quoteData;
+      console.log(latestPrice, previousClose);
       let newPrice = latestPrice * obj[item];
+      let color = '';
+      if (latestPrice > previousClose) {
+        color = 'green';
+      } else if (latestPrice < previousClose) {
+        color = 'red';
+      } else {
+        color = 'grey';
+      }
       return {
         id: uuid.v4(),
         symbol: item,
         qty: obj[item],
-        price: newPrice
+        price: newPrice,
+        color: color
       };
     } catch (err) {
       console.error(err.message);
