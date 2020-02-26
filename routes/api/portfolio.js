@@ -25,7 +25,7 @@ router.get('/', auth, async (req, res) => {
     try {
       const quoteData = await iex.quote(item);
       const { latestPrice, previousClose } = quoteData;
-      console.log(latestPrice, previousClose);
+      console.log(quoteData);
       let newPrice = latestPrice * obj[item];
       let color = '';
       if (latestPrice > previousClose) {
