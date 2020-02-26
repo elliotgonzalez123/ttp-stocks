@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://dbuser123:NkBWCq4FscoSDN43@cluster0-gxoaa.mongodb.net/ttp?retryWrites=true&w=majority",
+  "jwtSecret": "fishtaco"
+}
