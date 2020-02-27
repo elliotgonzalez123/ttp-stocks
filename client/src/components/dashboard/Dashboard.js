@@ -24,21 +24,21 @@ const Dashboard = ({ auth: { user }, getStock, stock: { stock } }) => {
           <h3>Balance: ${user.wallet}</h3>
         </div>
         <div className="dashboard-item">
-          {/* <Portfolio /> */}
-          <h1>Portfolio</h1>
+          <Portfolio />
+          {/* <h1>Portfolio</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Condimentum lacinia quis vel eros donec ac odio. Tempus quam
             pellentesque nec nam.
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="dashboard-right">
         <div className="dashboard-item">
           <Search onSearchSubmit={onSearchSubmit} />
         </div>
-        {stock ? <Stock /> : <div />}
+        {stock ? <Stock stock={stock} /> : <div />}
       </div>
     </div>
   );

@@ -52,7 +52,7 @@ router.post(
         user.wallet -= latestPrice * qty;
         await user.save();
         await userTransactions.save();
-        return res.status(200).send('Transaction Proccessed');
+        return res.status(200).send(userTransactions);
       } else {
         userTransactions.transactions.push({
           symbol,
@@ -62,7 +62,7 @@ router.post(
         user.wallet -= latestPrice * qty;
         await user.save();
         await userTransactions.save();
-        return res.status(200).send('Transaction Added To Portfolio');
+        return res.status(200).send(userTransactions);
       }
     } catch (err) {
       console.error(err.message);

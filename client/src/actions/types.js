@@ -12,3 +12,5 @@ export const GET_LIVE_PORTFOLIO = 'GET_LIVE_PORTFOLIO';
 export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 export const GET_STOCK = 'GET_STOCK';
 export const GET_STOCK_FAIL = 'GET_STOCK_FAIL';
+export const BUY_STOCK = 'BUY_STOCK';
+export const BUY_STOCK_FAIL = 'BUY STOCK';

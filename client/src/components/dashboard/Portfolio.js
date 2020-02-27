@@ -10,11 +10,12 @@ const Portfolio = ({ getLivePortfolio, portfolio: { portfolio } }) => {
     <div>
       <h1>Portfolio</h1>
       <ul>
-        {portfolio.map(item => (
-          <li key={item.id}>
-            {item.symbol} - {item.price}
-          </li>
-        ))}
+        {portfolio &&
+          portfolio.map(item => (
+            <li key={item.id}>
+              {item.symbol} - {item.price}
+            </li>
+          ))}
       </ul>
     </div>
   );

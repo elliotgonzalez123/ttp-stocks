@@ -10,7 +10,6 @@ export const getStock = stockObj => async dispatch => {
   };
 
   const body = JSON.stringify(stockObj);
-  console.log(body);
   try {
     const { data } = await axios.post(
       'http://localhost:5000/api/stock',
