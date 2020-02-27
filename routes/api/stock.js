@@ -6,7 +6,8 @@ const Transactions = require('../../models/Transactions');
 const iex = require('iexcloud_api_wrapper');
 const uuid = require('uuid');
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
+  console.log('REQ>BODY', req.body);
   try {
     const quoteData = await iex.quote(req.body.symbol);
     const {
