@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const Transactions = require('../../models/Transactions');
+const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
 const iex = require('iexcloud_api_wrapper');
 
@@ -41,13 +42,15 @@ router.post(
     const { latestPrice } = quoteData;
 
     try {
+      let user = await User.findById(req.user.id);
       let userTransactions = await Transactions.findOne({ user: req.user.id });
       if (!userTransactions) {
         userTransactions = new Transactions({
           user: req.user.id,
           transactions: [{ symbol, qty, price: latestPrice * qty }]
         });
-
+        user.wallet -= latestPrice * qty;
+        await user.save();
         await userTransactions.save();
         return res.status(200).send('Transaction Proccessed');
       } else {
@@ -56,6 +59,8 @@ router.post(
           qty,
           price: latestPrice * qty
         });
+        user.wallet -= latestPrice * qty;
+        await user.save();
         await userTransactions.save();
         return res.status(200).send('Transaction Added To Portfolio');
       }
