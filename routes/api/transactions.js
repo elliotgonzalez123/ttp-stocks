@@ -49,7 +49,17 @@ router.post(
           user: req.user.id,
           transactions: [{ symbol, qty, price: latestPrice * qty }]
         });
-        user.wallet -= latestPrice * qty;
+
+        if (user.wallet > latestPrice * qty) {
+          user.wallet -= latestPrice * qty;
+        } else {
+          return res
+            .status(400)
+            .json({
+              errors: [{ msg: 'Not enough money to purchase this stock' }]
+            });
+        }
+
         await user.save();
         await userTransactions.save();
         return res.status(200).send(userTransactions);
@@ -59,7 +69,15 @@ router.post(
           qty,
           price: latestPrice * qty
         });
-        user.wallet -= latestPrice * qty;
+
+        if (user.wallet > latestPrice * qty) {
+          user.wallet -= latestPrice * qty;
+        } else {
+          return res.status(400).json({
+            errors: [{ msg: 'Not enough money to purchase this stock' }]
+          });
+        }
+
         await user.save();
         await userTransactions.save();
         return res.status(200).send(userTransactions);

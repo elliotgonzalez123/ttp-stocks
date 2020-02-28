@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getAllTransactions } from '../../actions/transactions';
+import Moment from 'react-moment';
 
 const Transactions = ({
   getAllTransactions,
@@ -9,17 +10,32 @@ const Transactions = ({
   useEffect(() => {
     getAllTransactions();
   }, [getAllTransactions]);
+
   return (
     <div>
-      <h1>Transactions</h1>
-      <ul>
-        {transactions.map(item => (
-          <li key={item.id}>
-            {item.symbol} - $
-            {Math.round((item.price + Number.EPSILON) * 100) / 100}
-          </li>
-        ))}
-      </ul>
+      <h1 style={{ color: '#F49E2F' }}>Transactions</h1>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Stocks</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Purchase Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.map(item => (
+            <tr key={item._id}>
+              <td>{item.symbol}</td>
+              <td>{Math.round((item.price + Number.EPSILON) * 100) / 100}</td>
+              <td>{item.qty}</td>
+              <td>
+                <Moment>{item.date}</Moment>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

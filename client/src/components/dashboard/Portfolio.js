@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getLivePortfolio } from '../../actions/portfolio';
 import { getAllTransactions } from '../../actions/transactions';
-
+import Spinner from '../layout/Spinner';
 const Portfolio = ({
   getLivePortfolio,
   portfolio: { portfolio, loading },
   transactions,
-  getAllTransactions
+  getAllTransactions,
+  onSearchSubmit
 }) => {
   useEffect(() => {
     getLivePortfolio();
@@ -19,7 +20,7 @@ const Portfolio = ({
   }
 
   if (loading) {
-    return <div>Loading....</div>;
+    return <Spinner />;
   }
 
   return (
@@ -30,6 +31,13 @@ const Portfolio = ({
           className="fas fa-folder-open fa-2x"
           style={{ color: '#8136E9' }}
         ></i>
+      </div>
+      <div className="dashboard-card-header">
+        <p>
+          Stocks shown in green are up from yesterdays closing price, red
+          denotes they are down. Click each stock to see the latest stock
+          information.
+        </p>
       </div>
       <div className="dashboard-card-body">
         <ul>
@@ -42,7 +50,11 @@ const Portfolio = ({
                   borderRadius: '5px',
                   padding: '5px',
                   fontWeight: '600',
-                  margin: '2px'
+                  margin: '2px',
+                  cursor: 'pointer'
+                }}
+                onClick={e => {
+                  onSearchSubmit({ symbol: `${item.symbol}` });
                 }}
               >
                 {item.symbol}{' '}

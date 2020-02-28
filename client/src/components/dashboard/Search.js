@@ -8,6 +8,7 @@ const Search = ({ onSearchSubmit }) => {
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       <div className="dashboard-card-header">

@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { buyStock } from '../../actions/transactions';
 import PropTypes from 'prop-types';
+import Success from '../layout/Success';
 
-const Stock = ({ stock, buyStock }) => {
+const Stock = ({ stock, buyStock, isPurchased }) => {
   const [formData, setFormData] = useState({
     qty: ''
   });
 
+  const [purchased, setPurchased] = useState(isPurchased);
+
+  useEffect(() => {
+    setPurchased(isPurchased);
+  }, [stock, isPurchased]);
+
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  if (purchased === true) {
+    return (
+      <div className="dashboard-item">
+        <div className="dashboard-stock">
+          <Success />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard-item">
@@ -29,6 +45,9 @@ const Stock = ({ stock, buyStock }) => {
           className="form"
           onSubmit={e => {
             e.preventDefault();
+            if (formData.qty !== '' || formData.qty > 0) {
+              setPurchased(true);
+            }
             buyStock({ symbol: stock.symbol, qty: formData.qty });
             setFormData({ ...formData, qty: '' });
           }}

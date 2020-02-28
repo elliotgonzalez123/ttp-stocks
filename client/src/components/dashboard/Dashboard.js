@@ -29,7 +29,7 @@ const Dashboard = ({ auth: { user }, getStock, stock: { stock } }) => {
           </div>
           <div className="dashboard-card-body">
             <div style={{ marginLeft: '20px' }}>
-              <img src={userIcon} />
+              <img src={userIcon} alt="user-icon" />
             </div>
             <div style={{ width: '200px' }}>
               <h2>{user.name}</h2>
@@ -44,21 +44,14 @@ const Dashboard = ({ auth: { user }, getStock, stock: { stock } }) => {
           </div>
         </div>
         <div className="dashboard-item">
-          <Portfolio />
-          {/* <h1>Portfolio</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Condimentum lacinia quis vel eros donec ac odio. Tempus quam
-            pellentesque nec nam.
-          </p> */}
+          <Portfolio onSearchSubmit={onSearchSubmit} />
         </div>
       </div>
       <div className="dashboard-right">
         <div className="dashboard-item">
           <Search onSearchSubmit={onSearchSubmit} />
         </div>
-        {stock ? <Stock stock={stock} /> : <div />}
+        {stock ? <Stock stock={stock} isPurchased={false} /> : <div />}
       </div>
     </div>
   );
