@@ -26,6 +26,10 @@ router.get('/', auth, async (req, res) => {
   const userTransactions = await Transactions.findOne({
     user: req.user.id
   });
+
+  if (!userTransactions) {
+    return res.status(404).send('No Transactions found');
+  }
   let transactions = userTransactions.transactions;
   let obj = {};
 

@@ -24,6 +24,7 @@ router.get('/', auth, async (req, res) => {
     res.status(200).json(transactions);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send('Server Error');
   }
 });
 
