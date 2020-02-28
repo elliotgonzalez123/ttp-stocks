@@ -7,6 +7,10 @@ const iex = require('iexcloud_api_wrapper');
 const uuid = require('uuid');
 const Bottleneck = require('bottleneck/es5');
 
+//!!!!  PDF documentation states that I am to get the open price and compare it to the current price... Currently, the IEX api
+// is NOT returning the opening stock price, I am instead proceeding with the previous days close as a substitute value to
+//determine stock performance.
+
 //api limiter to avoid 429 errors from IEX api
 const limiter = new Bottleneck({
   maxConcurrent: 1,
