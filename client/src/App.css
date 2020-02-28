@@ -213,6 +213,7 @@ img {
 .bg-light,
 .badge-light {
   border: #ccc solid 1px;
+  border-radius: 5px;
 }
 
 .round-img {
