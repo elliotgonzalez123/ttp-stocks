@@ -56,12 +56,7 @@ router.get('/', auth, async (req, res) => {
   });
 
   const output = await Promise.all(promises);
-
-  if (output) {
-    return res.status(200).send(output);
-  } else {
-    return res.status(200).send([]);
-  }
+  return res.status(200).send(output);
 });
 
 module.exports = router;

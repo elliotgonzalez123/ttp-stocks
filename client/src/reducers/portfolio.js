@@ -1,4 +1,4 @@
-import { GET_LIVE_PORTFOLIO } from '../actions/types';
+import { GET_LIVE_PORTFOLIO, CLEAR_PORTFOLIO } from '../actions/types';
 
 const initialState = {
   portfolio: null,
@@ -10,6 +10,8 @@ export default function(state = initialState, action) {
   switch (type) {
     case GET_LIVE_PORTFOLIO:
       return { ...state, portfolio: payload, loading: false };
+    case CLEAR_PORTFOLIO:
+      return { ...state, portfolio: null, loading: true };
     default:
       return state;
   }

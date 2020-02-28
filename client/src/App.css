@@ -397,6 +397,18 @@ button {
 .dashboard-card-body h4 {
   font-weight: 300;
 }
+.dashboard-card-body ul {
+  width: 100%;
+}
+
+.dashboard-card-body li {
+  margin-bottom: 10px;
+
+  margin-left: 15px;
+  border: 1px solid #8136e9;
+  border-radius: 5px;
+  padding: 10px;
+}
 
 .dashboard-card-balance {
   display: flex;
@@ -425,6 +437,15 @@ button {
   margin-bottom: 10px;
   margin-right: 15px;
   margin-left: 15px;
+}
+
+.stock-qty {
+  border-radius: 5px;
+  background-color: #8136e9;
+  padding: 5px;
+  color: white;
+  font-weight: 600;
+  margin: 2px;
 }
 /* .dashboard-card-balance h3,
 h4,

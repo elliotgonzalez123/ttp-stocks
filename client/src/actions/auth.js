@@ -9,7 +9,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_STOCK
+  CLEAR_STOCK,
+  CLEAR_PORTFOLIO
 } from './types';
 
 export const loadUser = () => async dispatch => {
@@ -98,5 +99,8 @@ export const logout = () => dispatch => {
   });
   dispatch({
     type: CLEAR_STOCK
+  });
+  dispatch({
+    type: CLEAR_PORTFOLIO
   });
 };
