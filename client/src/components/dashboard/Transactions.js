@@ -12,6 +12,14 @@ const Transactions = ({
     getAllTransactions();
   }, [getAllTransactions]);
 
+  if (typeof transactions === 'string') {
+    return (
+      <div>
+        <h1>No Transactions made!</h1>
+      </div>
+    );
+  }
+
   return (
     <div>
       <h1 style={{ color: '#F49E2F' }}>Transactions</h1>
