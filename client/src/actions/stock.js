@@ -11,11 +11,7 @@ export const getStock = stockObj => async dispatch => {
 
   const body = JSON.stringify(stockObj);
   try {
-    const { data } = await axios.post(
-      'http://localhost:5000/api/stock',
-      body,
-      config
-    );
+    const { data } = await axios.post('/api/stock', body, config);
     dispatch({
       type: GET_STOCK,
       payload: data
