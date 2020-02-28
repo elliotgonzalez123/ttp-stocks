@@ -6,7 +6,7 @@ import { setAlert } from './alert';
 
 export const getAllTransactions = () => async dispatch => {
   try {
-    const { data } = await axios.get('http://localhost:5000/api/transactions');
+    const { data } = await axios.get('/api/transactions');
     dispatch({
       type: GET_TRANSACTIONS,
       payload: data
