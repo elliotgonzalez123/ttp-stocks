@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getLivePortfolio } from '../../actions/portfolio';
 import { getAllTransactions } from '../../actions/transactions';
 import Spinner from '../layout/Spinner';
+
 const Portfolio = ({
   getLivePortfolio,
   portfolio: { portfolio, loading },
@@ -10,15 +11,19 @@ const Portfolio = ({
   getAllTransactions,
   onSearchSubmit
 }) => {
+  //mounts thunk for live portfolio and also pulls all transactions to conditionally render portfolio to avoid infinite spinner
+  //when a user has no transactions
   useEffect(() => {
     getLivePortfolio();
     getAllTransactions();
   }, [getLivePortfolio, getAllTransactions]);
 
+  //checks if server response is a string... api returns a string when transactions are empty
   if (typeof transactions === 'string') {
     return <div>Buy some stocks!</div>;
   }
 
+  //spinner on load
   if (loading) {
     return <Spinner />;
   }
@@ -40,6 +45,7 @@ const Portfolio = ({
         </p>
       </div>
       <div className="dashboard-card-body">
+        {/* ul for live portfolio, elements are in each li via spans with custom inline styles, done for brevity */}
         <ul>
           {portfolio.map(item => (
             <li key={item.id}>

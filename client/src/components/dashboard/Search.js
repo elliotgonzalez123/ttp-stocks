@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+//component recieves onSearchSubmit function as props
 const Search = ({ onSearchSubmit }) => {
   const [formData, setFormData] = useState({
     symbol: ''

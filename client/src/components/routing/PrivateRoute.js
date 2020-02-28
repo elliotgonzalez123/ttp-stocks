@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+//custom routing component setup to hide protected routes from unauthorized users... bounces user back to login if not logged in
+
 const PrivateRoue = ({
   component: Component,
   auth: { isAuthenticated, loading },

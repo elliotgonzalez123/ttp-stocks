@@ -1,10 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const auth = require('../../middleware/auth');
-const Transactions = require('../../models/Transactions');
 const iex = require('iexcloud_api_wrapper');
-const uuid = require('uuid');
+
+//@route GET/api/stock
+//@desc return a stock with selected values
+//@access Public
 
 router.post('/', async (req, res) => {
   try {

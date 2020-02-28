@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
+//custom middleware that checks for token, verifies it and protects routes from unauthorized access
+
 module.exports = function(req, res, next) {
   const token = req.header('x-auth-token');
 

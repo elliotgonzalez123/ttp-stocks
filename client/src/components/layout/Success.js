@@ -1,5 +1,6 @@
 import React from 'react';
 
+//component for purchase success UI element
 const Success = () => {
   return (
     <div style={{ textAlign: 'center', margin: '0 auto' }}>

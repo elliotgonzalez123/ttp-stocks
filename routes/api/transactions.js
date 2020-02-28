@@ -7,6 +7,10 @@ const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
 const iex = require('iexcloud_api_wrapper');
 
+//@route GET/api/transactions
+//@desc gets users completed transactions
+//@access PRIVATE
+
 router.get('/', auth, async (req, res) => {
   try {
     let userTransactions = await Transactions.findOne({
@@ -22,6 +26,10 @@ router.get('/', auth, async (req, res) => {
     console.error(err.message);
   }
 });
+
+//@route GET/api/transactions
+//@desc buys a stock
+//@access PRIVATE
 
 router.post(
   '/',
@@ -53,11 +61,9 @@ router.post(
         if (user.wallet > latestPrice * qty) {
           user.wallet -= latestPrice * qty;
         } else {
-          return res
-            .status(400)
-            .json({
-              errors: [{ msg: 'Not enough money to purchase this stock' }]
-            });
+          return res.status(400).json({
+            errors: [{ msg: 'Not enough money to purchase this stock' }]
+          });
         }
 
         await user.save();

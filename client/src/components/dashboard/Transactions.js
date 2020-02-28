@@ -7,6 +7,7 @@ const Transactions = ({
   getAllTransactions,
   transactions: { transactions }
 }) => {
+  //mounts transaction data via thunk on mount
   useEffect(() => {
     getAllTransactions();
   }, [getAllTransactions]);

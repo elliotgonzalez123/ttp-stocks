@@ -12,6 +12,7 @@ const Dashboard = ({ auth: { user }, getStock, stock: { stock } }) => {
     return <h1>loading...</h1>;
   }
 
+  //connects from search component to load stock into state and pass it to the stock render component
   const onSearchSubmit = stockInfo => {
     getStock(stockInfo);
   };
@@ -51,6 +52,7 @@ const Dashboard = ({ auth: { user }, getStock, stock: { stock } }) => {
         <div className="dashboard-item">
           <Search onSearchSubmit={onSearchSubmit} />
         </div>
+        {/* conditionally rendering stock component based on what thunk gets back */}
         {stock ? <Stock stock={stock} isPurchased={false} /> : <div />}
       </div>
     </div>

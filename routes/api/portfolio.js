@@ -7,10 +7,16 @@ const iex = require('iexcloud_api_wrapper');
 const uuid = require('uuid');
 const Bottleneck = require('bottleneck/es5');
 
+//api limiter to avoid 429 errors from IEX api
 const limiter = new Bottleneck({
   maxConcurrent: 1,
   minTime: 333
 });
+
+//@route GET/api/portfolio
+//@desc custom route that combines transactions in database and realtime stock prices to return a custom object with
+//up to date prices and quantities
+//@access PRIVATE
 
 router.get('/', auth, async (req, res) => {
   const userTransactions = await Transactions.findOne({
@@ -27,6 +33,8 @@ router.get('/', auth, async (req, res) => {
     }
   });
 
+  //loop to create custom return object, promises throttled with limiter function at 333ms, could probably make this go faster, but
+  //do not want to push the IEX api too far
   let promises = Object.keys(obj).map(async item => {
     try {
       const quoteData = await limiter.schedule(() => iex.quote(item));
@@ -54,7 +62,7 @@ router.get('/', auth, async (req, res) => {
       console.error(err.message);
     }
   });
-
+  //resolve all promises
   const output = await Promise.all(promises);
   return res.status(200).send(output);
 });

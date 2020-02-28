@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 
 //@route GET/api/auth
-//@desc Test route
+//@desc authenticates user based on passed header token
 //@access Public
 
 router.get('/', auth, async (req, res) => {
@@ -22,7 +22,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 //@route POST/api/auth
-//@desc Auth User
+//@desc login route
 //@access Public
 
 router.post(

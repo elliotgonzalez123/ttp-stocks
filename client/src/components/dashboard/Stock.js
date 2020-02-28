@@ -9,15 +9,19 @@ const Stock = ({ stock, buyStock, isPurchased }) => {
     qty: ''
   });
 
+  //resets isPurchased to false in order to conditionally render success component on buy
   const [purchased, setPurchased] = useState(isPurchased);
 
   useEffect(() => {
     setPurchased(isPurchased);
   }, [stock, isPurchased]);
 
+  //sets qty of purchase
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  //conditional render
   if (purchased === true) {
     return (
       <div className="dashboard-item">
@@ -45,10 +49,13 @@ const Stock = ({ stock, buyStock, isPurchased }) => {
           className="form"
           onSubmit={e => {
             e.preventDefault();
+            //validates conditional render
             if (formData.qty !== '' || formData.qty > 0) {
               setPurchased(true);
             }
+            //sends thunk
             buyStock({ symbol: stock.symbol, qty: formData.qty });
+            //resets form
             setFormData({ ...formData, qty: '' });
           }}
         >
@@ -61,7 +68,6 @@ const Stock = ({ stock, buyStock, isPurchased }) => {
               onChange={onChange}
             ></input>
           </div>
-
           <button type="submit" className="btn btn-primary" value="Search">
             Buy
           </button>

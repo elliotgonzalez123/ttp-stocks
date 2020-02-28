@@ -14,11 +14,13 @@ import store from './store';
 import Alert from './components/layout/Alert';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+//checks LS for JW token, passes it to util function which sets it to a custom header
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
+  //keep suser logged in as long as token is valid
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
