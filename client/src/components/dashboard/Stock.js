@@ -4,7 +4,7 @@ import { buyStock } from '../../actions/transactions';
 import PropTypes from 'prop-types';
 import Success from '../layout/Success';
 
-const Stock = ({ stock, buyStock, isPurchased }) => {
+const Stock = ({ stock, buyStock, isPurchased, wallet }) => {
   const [formData, setFormData] = useState({
     qty: ''
   });
@@ -50,7 +50,9 @@ const Stock = ({ stock, buyStock, isPurchased }) => {
           onSubmit={e => {
             e.preventDefault();
             //validates conditional render
-            if (formData.qty !== '' || formData.qty > 0) {
+            if (formData.qty * stock.latestPrice > wallet) {
+              setPurchased(false);
+            } else if (formData.qty !== '' || formData.qty > 0) {
               setPurchased(true);
             }
             //sends thunk

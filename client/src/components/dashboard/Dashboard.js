@@ -53,7 +53,11 @@ const Dashboard = ({ auth: { user }, getStock, stock: { stock } }) => {
           <Search onSearchSubmit={onSearchSubmit} />
         </div>
         {/* conditionally rendering stock component based on what thunk gets back */}
-        {stock ? <Stock stock={stock} isPurchased={false} /> : <div />}
+        {stock ? (
+          <Stock stock={stock} isPurchased={false} wallet={user.wallet} />
+        ) : (
+          <div />
+        )}
       </div>
     </div>
   );
