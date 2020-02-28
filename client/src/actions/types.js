@@ -14,3 +14,4 @@ export const GET_STOCK = 'GET_STOCK';
 export const GET_STOCK_FAIL = 'GET_STOCK_FAIL';
 export const BUY_STOCK = 'BUY_STOCK';
 export const BUY_STOCK_FAIL = 'BUY STOCK';
+export const CLEAR_STOCK = 'CLEAR STOCK';

@@ -2,22 +2,34 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getLivePortfolio } from '../../actions/portfolio';
 
-const Portfolio = ({ getLivePortfolio, portfolio: { portfolio } }) => {
+const Portfolio = ({ getLivePortfolio, portfolio: { portfolio, loading } }) => {
   useEffect(() => {
     getLivePortfolio();
   }, [getLivePortfolio]);
+
+  if (loading) {
+    return <div>Loading....</div>;
+  }
+
+  // if (portfolio.length === 0) {
+  //   return <div>Buy some stocks!</div>;
+  // }
   return (
-    <div>
-      <h1>Portfolio</h1>
-      <ul>
-        {portfolio &&
-          portfolio.map(item => (
+    <>
+      <div className="dashboard-card-header">
+        <h1>Portfolio</h1>
+      </div>
+      <div className="dashboard-card-body">
+        <ul>
+          {portfolio.map(item => (
             <li key={item.id}>
-              {item.symbol} - {item.price}
+              {item.symbol} -{' '}
+              {Math.round((item.price + Number.EPSILON) * 100) / 100}
             </li>
           ))}
-      </ul>
-    </div>
+        </ul>
+      </div>
+    </>
   );
 };
 

@@ -7,7 +7,6 @@ const iex = require('iexcloud_api_wrapper');
 const uuid = require('uuid');
 
 router.post('/', async (req, res) => {
-  console.log('REQ>BODY', req.body);
   try {
     const quoteData = await iex.quote(req.body.symbol);
     const {

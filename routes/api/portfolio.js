@@ -31,7 +31,7 @@ router.get('/', auth, async (req, res) => {
     try {
       const quoteData = await limiter.schedule(() => iex.quote(item));
       const { latestPrice, previousClose } = quoteData;
-      console.log(quoteData);
+
       if (quoteData) {
         let newPrice = latestPrice * obj[item];
         let color = '';
@@ -56,7 +56,12 @@ router.get('/', auth, async (req, res) => {
   });
 
   const output = await Promise.all(promises);
-  return res.status(200).send(output);
+
+  if (output) {
+    return res.status(200).send(output);
+  } else {
+    return res.status(200).send([]);
+  }
 });
 
 module.exports = router;

@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { GET_TRANSACTIONS, BUY_STOCK } from './types';
+import { getLivePortfolio } from './portfolio';
+import { loadUser } from './auth';
+import { setAlert } from './alert';
 
 export const getAllTransactions = () => async dispatch => {
   try {
@@ -31,14 +34,12 @@ export const buyStock = stockObj => async dispatch => {
       type: BUY_STOCK,
       payload: data
     });
+    dispatch(getLivePortfolio());
+    dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
-    console.log(errors);
-    // if (errors) {
-    //   dispatch(setAlert(errors.msg, 'danger'));
-    // }
-    // dispatch({
-    //   type: GET_STOCK_FAIL
-    // });
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
   }
 };

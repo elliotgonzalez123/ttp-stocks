@@ -15,7 +15,8 @@ const Transactions = ({
       <ul>
         {transactions.map(item => (
           <li key={item.id}>
-            {item.symbol} - ${item.price}
+            {item.symbol} - $
+            {Math.round((item.price + Number.EPSILON) * 100) / 100}
           </li>
         ))}
       </ul>

@@ -14,12 +14,17 @@ const Stock = ({ stock, buyStock }) => {
 
   return (
     <div className="dashboard-item">
-      <div>
+      <div className="dashboard-stock">
         <h1>{stock.symbol}</h1>
         <h4>{stock.companyName}</h4>
-        <p>{stock.latestPrice}</p>
+        <h2>
+          ${Math.round((stock.latestPrice + Number.EPSILON) * 100) / 100} USD{' '}
+          <span className={stock.change > 0 ? 'stock-up' : 'stock-down'}>
+            {stock.change} ({stock.changePercent * 100}%)
+          </span>
+        </h2>
       </div>
-      <div>
+      <div className="dashboard-form-body">
         <form
           className="form"
           onSubmit={e => {

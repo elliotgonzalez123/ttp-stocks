@@ -5,6 +5,7 @@ import Portfolio from './Portfolio';
 import Search from './Search';
 import Stock from './Stock';
 import { getStock } from '../../actions/stock';
+import userIcon from '../../img/user_icon.svg';
 
 const Dashboard = ({ auth: { user }, getStock, stock: { stock } }) => {
   if (!user) {
@@ -19,9 +20,28 @@ const Dashboard = ({ auth: { user }, getStock, stock: { stock } }) => {
     <div className="dashboard">
       <div className="dashboard-left">
         <div className="dashboard-item">
-          <h1>Welcome {user.name}</h1>
-          <h4>{user.email}</h4>
-          <h3>Balance: ${user.wallet}</h3>
+          <div className="dashboard-card-header">
+            <h1 style={{ color: '#F49E2F' }}>Welcome, {user.name}!</h1>
+            <i
+              className="fas fa-chart-line fa-2x"
+              style={{ color: '#8136E9' }}
+            ></i>
+          </div>
+          <div className="dashboard-card-body">
+            <div style={{ marginLeft: '20px' }}>
+              <img src={userIcon} />
+            </div>
+            <div style={{ width: '200px' }}>
+              <h2>{user.name}</h2>
+              <h4>{user.email}</h4>
+              <div className="dashboard-card-balance">
+                <h4 style={{ color: 'white' }}>Account Balance:</h4>
+                <h1 style={{ color: 'white' }}>
+                  ${Math.round((user.wallet + Number.EPSILON) * 100) / 100}
+                </h1>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="dashboard-item">
           <Portfolio />
